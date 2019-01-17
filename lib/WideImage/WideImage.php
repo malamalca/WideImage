@@ -171,9 +171,10 @@ class WideImage
 	 * Create and load an image from a file or URL. The image format is auto-detected.
 	 * 
 	 * @param string $uri File or url
+	 * @param string $format Format hint, usually not needed
 	 * @return \WideImage\Image|\WideImage\PaletteImage|\WideImage\TrueColorImage
 	 */
-	public static function loadFromFile($uri)
+	public static function loadFromFile($uri, $format = null)
 	{
 		$data   = file_get_contents($uri);
 		$handle = @imagecreatefromstring($data);
@@ -181,7 +182,7 @@ class WideImage
 		if (!static::isValidImageHandle($handle)) {
 			try {
 				// try to find a mapper first
-				$mapper = MapperFactory::selectMapper($uri);
+				$mapper = MapperFactory::selectMapper($uri, $format);
 				
 				if ($mapper) {
 					$handle = $mapper->load($uri);

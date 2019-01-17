@@ -144,11 +144,13 @@ abstract class Image
 	 * </code>
 	 * 
 	 * @param string $uri File location
+	 * @param string $format Override the format. If null, the format is determined from $uri extension.
 	 */
-	public function saveToFile($uri)
+	public function saveToFile($uri, $format = null)
 	{
 		$mapper = MapperFactory::selectMapper($uri, null);
 		$args = func_get_args();
+        unset($args[1]);
 		array_unshift($args, $this->getHandle());
 		$res = call_user_func_array(array($mapper, 'save'), $args);
 		
