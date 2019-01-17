@@ -148,7 +148,7 @@ abstract class Image
 	 */
 	public function saveToFile($uri, $format = null)
 	{
-		$mapper = MapperFactory::selectMapper($uri, null);
+		$mapper = MapperFactory::selectMapper($uri, $format);
 		$args = func_get_args();
         unset($args[1]);
 		array_unshift($args, $this->getHandle());
