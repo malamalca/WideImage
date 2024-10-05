@@ -340,16 +340,18 @@ class WideImage
 	{
 		return TrueColorImage::create($width, $height);
 	}
-
+	
 	/**
 	 * Check whether the given handle is a valid GD resource
-	 *
+	 * 
 	 * @param mixed $handle The variable to check
 	 * @return bool
 	 */
 	public static function isValidImageHandle($handle)
 	{
-		return (is_resource($handle) && get_resource_type($handle) == 'gd');
+		return 
+			(is_resource($handle) && get_resource_type($handle) === 'gd') ||
+			(is_object($handle) && $handle instanceof \GDImage);
 	}
 
 	/**
