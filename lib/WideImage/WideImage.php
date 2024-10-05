@@ -350,7 +350,9 @@ class WideImage
 	 */
 	public static function isValidImageHandle($handle)
 	{
-		return (is_resource($handle) && get_resource_type($handle) == 'gd');
+		return 
+			(is_resource($handle) && get_resource_type($handle) === 'gd') ||
+			(is_object($handle) && $handle instanceof \GDImage);
 	}
 	
 	/**
